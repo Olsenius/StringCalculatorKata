@@ -6,15 +6,28 @@ namespace StringCalculator
     {
         public static int Add(string numbers)
         {
-            if (string.IsNullOrEmpty(numbers)) 
-                return 0;
             if (numbers.Contains(","))
             {
                 var allNumbers = numbers.Split(',');
-                return Convert.ToInt32(allNumbers[0]) + Convert.ToInt32(allNumbers[1]);
+                return allNumbers[0].ToInt() + allNumbers[1].ToInt();
             }
 
-            return Convert.ToInt32(numbers);
+            return numbers.ToInt();
+        }
+    }
+
+    public static class StringExtensions
+    {
+        public static int ToInt(this string number)
+        {
+            try
+            {
+                return Convert.ToInt32(number);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
     }
 }
