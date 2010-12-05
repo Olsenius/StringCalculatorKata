@@ -4,9 +4,9 @@ namespace StringCalculator
     {
         public static int Add(string numbers)
         {
-            if (numbers.Contains(","))
+            if (numbers.Contains(",") || numbers.Contains("\n"))
             {
-                var allNumbers = numbers.Split(',');
+                var allNumbers = numbers.Split(new[] { ',', '\n' });
                 int sum = 0;
                 foreach (var number in allNumbers)
                 {
