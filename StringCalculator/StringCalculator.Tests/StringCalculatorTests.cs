@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 
 namespace StringCalculator.Tests
@@ -12,11 +13,12 @@ namespace StringCalculator.Tests
             result.ShouldEqual(0);
         }
 
-        [Test]
-        public void Single_number_should_be_number()
+        [TestCase("1", 1)]
+        [TestCase("37", 37)]
+        public void Should_handle_single_numbers(string numbers, int expectedSum)
         {
-            var result = StringCalculator.Add("1");
-            result.ShouldEqual(1);
+            var result = StringCalculator.Add(numbers);
+            result.ShouldEqual(expectedSum);
         }
     }
 }
