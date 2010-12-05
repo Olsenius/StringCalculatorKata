@@ -1,5 +1,3 @@
-using System;
-
 namespace StringCalculator
 {
     public class StringCalculator
@@ -13,21 +11,6 @@ namespace StringCalculator
             }
 
             return numbers.ToInt();
-        }
-    }
-
-    public static class StringExtensions
-    {
-        public static int ToInt(this string number)
-        {
-            try
-            {
-                return Convert.ToInt32(number);
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
         }
     }
 }
