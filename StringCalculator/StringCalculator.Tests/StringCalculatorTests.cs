@@ -20,5 +20,12 @@ namespace StringCalculator.Tests
             var result = StringCalculator.Add(numbers);
             result.ShouldEqual(expectedSum);
         }
+
+        [TestCase("1,2", 3)]
+        public void Should_handle_two_numbers(string numbers, int expectedSum)
+        {
+            var result = StringCalculator.Add(numbers);
+            result.ShouldEqual(expectedSum);
+        }
     }
 }
