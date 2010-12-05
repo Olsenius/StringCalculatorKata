@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace StringCalculator
 {
     public class StringCalculator
@@ -7,12 +9,7 @@ namespace StringCalculator
             if (numbers.Contains(",") || numbers.Contains("\n"))
             {
                 var allNumbers = numbers.Split(new[] { ',', '\n' });
-                int sum = 0;
-                foreach (var number in allNumbers)
-                {
-                    sum += number.ToInt();
-                }
-                return sum;
+                return allNumbers.Sum(number => number.ToInt());
             }
 
             return numbers.ToInt();

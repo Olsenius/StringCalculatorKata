@@ -41,5 +41,12 @@ namespace StringCalculator.Tests
             var result = StringCalculator.Add(numbers);
             result.ShouldEqual(expectedSum);
         }
+
+        [TestCase("//;\n1;2", 3)]
+        public void Should_handle_different_delimiters(string numbers, int expectedSum)
+        {
+            var result = StringCalculator.Add(numbers);
+            result.ShouldEqual(expectedSum);
+        }
     }
 }
