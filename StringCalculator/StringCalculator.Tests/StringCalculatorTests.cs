@@ -34,5 +34,12 @@ namespace StringCalculator.Tests
             var result = StringCalculator.Add(numbers);
             result.ShouldEqual(expectedSum);
         }
+
+        [TestCase("1\n2,3", 6)]
+        public void Should_handle_new_line_between_numbers(string numbers, int expectedSum)
+        {
+            var result = StringCalculator.Add(numbers);
+            result.ShouldEqual(expectedSum);
+        }
     }
 }

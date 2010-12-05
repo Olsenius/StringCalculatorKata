@@ -7,7 +7,12 @@ namespace StringCalculator
             if (numbers.Contains(","))
             {
                 var allNumbers = numbers.Split(',');
-                return allNumbers[0].ToInt() + allNumbers[1].ToInt();
+                int sum = 0;
+                foreach (var number in allNumbers)
+                {
+                    sum += number.ToInt();
+                }
+                return sum;
             }
 
             return numbers.ToInt();
