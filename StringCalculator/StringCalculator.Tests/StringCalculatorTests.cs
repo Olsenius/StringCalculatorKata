@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using NUnit.Framework;
 
@@ -47,6 +48,13 @@ namespace StringCalculator.Tests
         {
             var result = StringCalculator.Add(numbers);
             result.ShouldEqual(expectedSum);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException),ExpectedMessage = "-1")]
+        public void Negative_number_should_throw_exception()
+        {
+            StringCalculator.Add("1,-1");
         }
     }
 }

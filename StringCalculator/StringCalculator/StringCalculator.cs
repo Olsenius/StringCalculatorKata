@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace StringCalculator
@@ -6,9 +7,17 @@ namespace StringCalculator
     {
         public static int Add(string numbers)
         {
-            if (numbers.Contains(",") || numbers.Contains("\n"))
+            char delimiter = 'a';
+
+            if (numbers.Contains("//"))
             {
-                var allNumbers = numbers.Split(new[] { ',', '\n' });
+                delimiter = Convert.ToChar(numbers.Substring(numbers.IndexOf("//") + 2, 1));
+                numbers = numbers.Substring(numbers.IndexOf("//") + 4);
+            }
+
+            if (numbers.Contains(",") || numbers.Contains("\n") || numbers.Contains(delimiter))
+            {
+                var allNumbers = numbers.Split(new[] { ',', '\n', delimiter });
                 return allNumbers.Sum(number => number.ToInt());
             }
 
