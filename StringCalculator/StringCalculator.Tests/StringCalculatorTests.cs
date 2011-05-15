@@ -54,20 +54,23 @@ namespace StringCalculator.Tests
         [Test]
         public void Negative_number_should_throw_exception()
         {
-            ShouldThrowException(StringCalculator.Add, "1,-1");
+            var exception = GetExeption(StringCalculator.Add, "1,-1");
+
+            exception.Message.ShouldContain("-1");
         }
 
-        private void ShouldThrowException(Func<string, int> add, string numbers)
+        public static Exception GetExeption(Func<string, int> function, string parameter)
         {
             try
             {
-                add(numbers);
+                function(parameter);
             }
-            catch
+            catch (Exception e)
             {
-                return;
+                return e;
             }
             Assert.Fail("Did not throw exception.");
+            return null;
         }
     }
 }

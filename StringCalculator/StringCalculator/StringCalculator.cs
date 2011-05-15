@@ -9,6 +9,7 @@ namespace StringCalculator
         {
             if (numbers.Contains("-"))
                 throw new Exception();
+
             char delimiter = 'a';
 
             if (numbers.Contains("//"))
