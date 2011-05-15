@@ -44,6 +44,7 @@ namespace StringCalculator.Tests
         }
 
         [TestCase("//;\n1;2", 3)]
+        [TestCase("//å\n1å2,3", 6)]
         public void Should_handle_different_delimiters(string numbers, int expectedSum)
         {
             var result = StringCalculator.Add(numbers);
@@ -51,10 +52,22 @@ namespace StringCalculator.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException),ExpectedMessage = "-1")]
         public void Negative_number_should_throw_exception()
         {
-            StringCalculator.Add("1,-1");
+            ShouldThrowException(StringCalculator.Add, "1,-1");
+        }
+
+        private void ShouldThrowException(Func<string, int> add, string numbers)
+        {
+            try
+            {
+                add(numbers);
+            }
+            catch
+            {
+                return;
+            }
+            Assert.Fail("Did not throw exception.");
         }
     }
 }
