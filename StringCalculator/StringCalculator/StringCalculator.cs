@@ -7,6 +7,8 @@ namespace StringCalculator
     {
         public static int Add(string numbers)
         {
+            if (numbers.Contains("-"))
+                throw new Exception();
             char delimiter = 'a';
 
             if (numbers.Contains("//"))
