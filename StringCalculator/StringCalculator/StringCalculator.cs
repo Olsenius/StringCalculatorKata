@@ -1,30 +1,51 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace StringCalculator
 {
     public class StringCalculator
     {
+        private static readonly List<char> _delimiters = new List<char> { ',', '\n' };
+
         public static int Add(string numbers)
         {
             if (numbers.Contains("-"))
                 throw new Exception();
 
-            char delimiter = 'a';
-
-            if (numbers.Contains("//"))
+            if (HasCustomDelimiter(numbers))
             {
-                delimiter = Convert.ToChar(numbers.Substring(numbers.IndexOf("//") + 2, 1));
-                numbers = numbers.Substring(numbers.IndexOf("//") + 4);
+                AddCustomDelimiter(numbers);
+                numbers = RemoveDelimiterPrefix(numbers);
             }
 
-            if (numbers.Contains(",") || numbers.Contains("\n") || numbers.Contains(delimiter))
+            if (ContainsSeveralNumbers(numbers))
             {
-                var allNumbers = numbers.Split(new[] { ',', '\n', delimiter });
+                var allNumbers = numbers.Split(_delimiters.ToArray());
                 return allNumbers.Sum(number => number.ToInt());
             }
 
             return numbers.ToInt();
+        }
+
+        private static bool HasCustomDelimiter(string numbers)
+        {
+            return numbers.Contains("//");
+        }
+
+        private static void AddCustomDelimiter(string numbers)
+        {
+            _delimiters.Add(Convert.ToChar(numbers.Substring(numbers.IndexOf("//") + 2, 1)));
+        }
+
+        private static string RemoveDelimiterPrefix(string numbers)
+        {
+            return numbers.Substring(numbers.IndexOf("//") + 4);
+        }
+
+        private static bool ContainsSeveralNumbers(string numbers)
+        {
+            return _delimiters.Any(x => numbers.Contains(x));
         }
     }
 }

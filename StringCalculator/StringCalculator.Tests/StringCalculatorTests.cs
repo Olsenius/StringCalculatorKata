@@ -71,6 +71,6 @@ namespace StringCalculator.Tests
             }
             Assert.Fail("Did not throw exception.");
             return null;
-        }
+        }   
     }
 }
