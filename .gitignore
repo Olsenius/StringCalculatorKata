@@ -34,3 +34,6 @@ deploy/*
  
 # Exclude ALL DLLs?
 #*.dll
+
+*.crunchsolution.local.xml
+*.crunchproject.local.xml
