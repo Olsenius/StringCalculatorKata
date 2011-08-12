@@ -10,9 +10,6 @@ namespace StringCalculator
 
         public static int Add(string numbers)
         {
-            if (numbers.Contains("-"))
-                throw new Exception("-1");
-
             if (HasCustomDelimiter(numbers))
             {
                 AddCustomDelimiter(numbers);
@@ -22,6 +19,12 @@ namespace StringCalculator
             if (ContainsSeveralNumbers(numbers))
             {
                 var allNumbers = numbers.Split(_delimiters.ToArray());
+
+                var negativeNumbers = allNumbers.Where(x => x.ToInt() < 0);
+
+                if (negativeNumbers.Any())
+                    ThrowNegativeNumberException(negativeNumbers);
+
                 return allNumbers.Sum(number => number.ToInt());
             }
 
@@ -46,6 +49,11 @@ namespace StringCalculator
         private static bool ContainsSeveralNumbers(string numbers)
         {
             return _delimiters.Any(x => numbers.Contains(x));
+        }
+
+        private static void ThrowNegativeNumberException(IEnumerable<string> negativeNumbers)
+        {
+            throw new Exception("Negative numbers not allowed: " + negativeNumbers.FirstOrDefault());
         }
     }
 }

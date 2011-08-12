@@ -58,9 +58,9 @@ namespace StringCalculator.Tests
             var exception = GetExeption(StringCalculator.Add, numbers);
         }
 
-        [TestCase("1,-1","-1")]
-        [TestCase("1,-2","-2")]
-        public void Negative_number_should_be_returned_as_message(string numbers,string expectedMessage)
+        [TestCase("1,-1","Negative numbers not allowed: -1")]
+        [TestCase("1,-2","Negative numbers not allowed: -2")]
+        public void Negative_number_should_be_returned_in_exception_message(string numbers,string expectedMessage)
         {
             var exception = GetExeption(StringCalculator.Add, numbers);
 
