@@ -60,7 +60,8 @@ namespace StringCalculator.Tests
 
         [TestCase("1,-1","Negative numbers not allowed: -1")]
         [TestCase("1,-2","Negative numbers not allowed: -2")]
-        public void Negative_number_should_be_returned_in_exception_message(string numbers,string expectedMessage)
+        [TestCase("-1,2,-3,-900,-7,8", "Negative numbers not allowed: -1,-3,-900,-7")]
+        public void Negative_numbers_should_be_returned_in_exception_message(string numbers,string expectedMessage)
         {
             var exception = GetExeption(StringCalculator.Add, numbers);
 
