@@ -51,12 +51,20 @@ namespace StringCalculator.Tests
             result.ShouldEqual(expectedSum);
         }
 
-        [Test]
-        public void Negative_number_should_throw_exception()
+        [TestCase("1,-1")]
+        [TestCase("1,-2")]
+        public void Negative_number_should_throw_exception(string numbers)
         {
-            var exception = GetExeption(StringCalculator.Add, "1,-1");
+            var exception = GetExeption(StringCalculator.Add, numbers);
+        }
 
-            exception.Message.ShouldContain("-1");
+        [TestCase("1,-1","-1")]
+        [TestCase("1,-2","-2")]
+        public void Negative_number_should_be_returned_as_message(string numbers,string expectedMessage)
+        {
+            var exception = GetExeption(StringCalculator.Add, numbers);
+
+            exception.Message.ShouldContain(expectedMessage);
         }
 
         public static Exception GetExeption(Func<string, int> function, string parameter)

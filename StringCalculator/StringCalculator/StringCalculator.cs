@@ -11,7 +11,7 @@ namespace StringCalculator
         public static int Add(string numbers)
         {
             if (numbers.Contains("-"))
-                throw new Exception();
+                throw new Exception("-1");
 
             if (HasCustomDelimiter(numbers))
             {
