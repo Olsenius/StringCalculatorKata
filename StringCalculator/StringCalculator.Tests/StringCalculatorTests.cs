@@ -68,6 +68,13 @@ namespace StringCalculator.Tests
             exception.Message.ShouldContain(expectedMessage);
         }
 
+        [TestCase("2,1001", "2")]
+        public void Numbers_bigger_than_thousand_sould_be_ignored(string numbers,string expectedSum)
+        {
+            var result = StringCalculator.Add(numbers);
+            result.ShouldEqual(expectedSum);
+        }
+
         public static Exception GetExeption(Func<string, int> function, string parameter)
         {
             try

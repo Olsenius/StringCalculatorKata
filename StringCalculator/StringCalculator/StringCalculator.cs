@@ -53,7 +53,8 @@ namespace StringCalculator
 
         private static void ThrowNegativeNumberException(IEnumerable<string> negativeNumbers)
         {
-            throw new Exception("Negative numbers not allowed: " + negativeNumbers.FirstOrDefault());
+            var message = negativeNumbers.Aggregate((current, negativeNumber) => current + ("," + negativeNumber));
+            throw new Exception("Negative numbers not allowed: " + message);
         }
     }
 }
