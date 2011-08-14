@@ -75,6 +75,14 @@ namespace StringCalculator.Tests
             result.ShouldEqual(expectedSum);
         }
 
+        [TestCase("//[***]\n1***2***3", 6)]
+        public void Should_handle_delimiters_of_any_length(string numbers, int expectedSum)
+        {
+            var result = StringCalculator.Add(numbers);
+            result.ShouldEqual(expectedSum);
+        }
+
+
         public static Exception GetExeption(Func<string, int> function, string parameter)
         {
             try
