@@ -84,6 +84,7 @@ namespace StringCalculator.Tests
         }
 
         [TestCase("//[*][%]\n1*2%3", 6)]
+        [TestCase("//[[[[][]]]]\n1[[[2]]]3", 6)]
         public void Should_handle_multiple_delimiters(string numbers, int expectedSum)
         {
             var result = StringCalculator.Add(numbers);
