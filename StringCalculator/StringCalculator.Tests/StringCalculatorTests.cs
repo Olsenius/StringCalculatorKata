@@ -55,21 +55,21 @@ namespace StringCalculator.Tests
         [TestCase("1,-2")]
         public void Negative_number_should_throw_exception(string numbers)
         {
-            var exception = GetExeption(StringCalculator.Add, numbers);
+            GetExeption(StringCalculator.Add, numbers);
         }
 
-        [TestCase("1,-1","Negative numbers not allowed: -1")]
-        [TestCase("1,-2","Negative numbers not allowed: -2")]
+        [TestCase("1,-1", "Negative numbers not allowed: -1")]
+        [TestCase("1,-2", "Negative numbers not allowed: -2")]
         [TestCase("-1,2,-3,-900,-7,8", "Negative numbers not allowed: -1,-3,-900,-7")]
-        public void Negative_numbers_should_be_returned_in_exception_message(string numbers,string expectedMessage)
+        public void Negative_numbers_should_be_returned_in_exception_message(string numbers, string expectedMessage)
         {
             var exception = GetExeption(StringCalculator.Add, numbers);
 
             exception.Message.ShouldContain(expectedMessage);
         }
 
-        [TestCase("2,1001", "2")]
-        public void Numbers_bigger_than_thousand_sould_be_ignored(string numbers,string expectedSum)
+        [TestCase("2,1001", 2)]
+        public void Numbers_bigger_than_thousand_sould_be_ignored(string numbers, int expectedSum)
         {
             var result = StringCalculator.Add(numbers);
             result.ShouldEqual(expectedSum);
@@ -87,6 +87,6 @@ namespace StringCalculator.Tests
             }
             Assert.Fail("Did not throw exception.");
             return null;
-        }   
+        }
     }
 }

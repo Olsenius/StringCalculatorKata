@@ -18,14 +18,17 @@ namespace StringCalculator
 
             if (ContainsSeveralNumbers(numbers))
             {
-                var allNumbers = numbers.Split(_delimiters.ToArray());
+                var allNumbers = numbers.Split(_delimiters.ToArray())
+                    .Select(number => number.ToInt());
 
-                var negativeNumbers = allNumbers.Where(x => x.ToInt() < 0);
+                var negativeNumbers = allNumbers.Where(number => number < 0);
 
                 if (negativeNumbers.Any())
-                    ThrowNegativeNumberException(negativeNumbers);
+                    ThrowNegativeNumberException(negativeNumbers.Select(number => number.ToString()));
 
-                return allNumbers.Sum(number => number.ToInt());
+                return allNumbers
+                    .Where(number => number <1000)
+                    .Sum(number => number);
             }
 
             return numbers.ToInt();
