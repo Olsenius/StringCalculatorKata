@@ -6,18 +6,18 @@ namespace StringCalculator
 {
     public class StringCalculator
     {
-        private static readonly List<char> _delimiters = new List<char> { ',', '\n' };
+        private static readonly List<string> _delimiters = new List<string> { ",", '\n'.ToString() };
 
         public static int Add(string numbers)
         {
             if (HasCustomDelimiter(numbers))
             {
-                numbers = ReplaceCustomDelimiterWithComma(numbers);
+                AddCustomDelimiter(numbers);
             }
 
             if (ContainsSeveralNumbers(numbers))
             {
-                var allNumbers = numbers.Split(_delimiters.ToArray())
+                var allNumbers = numbers.Split(_delimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries)
                     .Select(number => number.ToInt());
 
                 var negativeNumbers = allNumbers.Where(number => number < 0);
@@ -26,7 +26,7 @@ namespace StringCalculator
                     ThrowNegativeNumberException(negativeNumbers.Select(number => number.ToString()));
 
                 return allNumbers
-                    .Where(number => number <1000)
+                    .Where(number => number < 1000)
                     .Sum(number => number);
             }
 
@@ -43,8 +43,9 @@ namespace StringCalculator
 
         private static string FindCustomDelimiter(string numbers)
         {
+
             var delimiter = "";
-            if(numbers.Contains("["))
+            if (numbers.Contains("["))
             {
                 var start = numbers.IndexOf("[") + 1;
                 var stop = numbers.IndexOf("]");
@@ -64,7 +65,25 @@ namespace StringCalculator
 
         private static void AddCustomDelimiter(string numbers)
         {
-            _delimiters.Add(Convert.ToChar(numbers.Substring(numbers.IndexOf("//") + 2, 1)));
+            if (numbers.Contains("["))
+            {
+                var remaining = numbers;
+                while (remaining.Contains("["))
+                {
+                    var start = remaining.IndexOf("[") + 1;
+                    var stop = remaining.IndexOf("]");
+                    var length = stop - start;
+
+                    _delimiters.Add(remaining.Substring(start, length));
+
+                    remaining = remaining.Substring(stop + 1);
+                }
+            }
+            else
+            {
+                _delimiters.Add(numbers.Substring(numbers.IndexOf("//") + 2, 1));
+
+            }
         }
 
         private static string RemoveDelimiterPrefix(string numbers)
