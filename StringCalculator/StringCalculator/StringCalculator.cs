@@ -33,31 +33,6 @@ namespace StringCalculator
             return numbers.ToInt();
         }
 
-        private static string ReplaceCustomDelimiterWithComma(string numbers)
-        {
-            string customDelimiter = FindCustomDelimiter(numbers);
-            numbers = numbers.Replace(customDelimiter, ",");
-            numbers = RemoveDelimiterPrefix(numbers);
-            return numbers;
-        }
-
-        private static string FindCustomDelimiter(string numbers)
-        {
-
-            var delimiter = "";
-            if (numbers.Contains("["))
-            {
-                var start = numbers.IndexOf("[") + 1;
-                var stop = numbers.IndexOf("]");
-                delimiter = numbers.Substring(start, stop - start);
-            }
-            else
-            {
-                delimiter = numbers.Substring(numbers.IndexOf("//") + 2, 1);
-            }
-            return delimiter;
-        }
-
         private static bool HasCustomDelimiter(string numbers)
         {
             return numbers.Contains("//");
